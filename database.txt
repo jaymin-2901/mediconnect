@@ -1,0 +1,51 @@
+CREATE TABLE admin_logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    admin_id INT NOT NULL,
+    consultation_id INT NOT NULL,
+    action ENUM('approved', 'rejected', 'completed'),
+    action_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (admin_id) REFERENCES users(id),
+    FOREIGN KEY (consultation_id) REFERENCES consultations(id)
+);
+CREATE TABLE patient_address (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    address TEXT,
+    city VARCHAR(50),
+    state VARCHAR(50),
+    pincode VARCHAR(10),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+CREATE TABLE consultations (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    patient_id INT NOT NULL,
+    consultation_type ENUM('online', 'offline') NOT NULL,
+    urgency_level ENUM('normal', 'urgent', 'emergency') DEFAULT 'normal',
+    symptoms TEXT,
+    preferred_date DATE,
+    preferred_time TIME,
+    status ENUM('pending', 'approved', 'rejected', 'completed') DEFAULT 'pending',
+    admin_notes TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (patient_id) REFERENCES users(id) ON DELETE CASCADE
+);
+CREATE TABLE medical_history (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    blood_type VARCHAR(5),
+    allergies TEXT,
+    current_medications TEXT,
+    chronic_conditions TEXT,
+    previous_surgeries TEXT,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    role ENUM('patient', 'admin') NOT NULL,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    email VARCHAR(100) UNIQUE NOT NULL,
+    phone VARCHAR(15),
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
