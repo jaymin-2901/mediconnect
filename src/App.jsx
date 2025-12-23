@@ -8,7 +8,7 @@ const knowledgeBase = [
       'Sip warm water or ginger-honey tea every few hours.',
       'Do gentle steam inhalation for 5–7 minutes to ease a blocked nose.',
       'Avoid cold drinks and get good rest.',
-      'Homeopathic options often used: Aconite 30 for sudden chills, Bryonia 30 for dry cough, Arsenicum 30 for runny nose. Follow pack guidance.',
+      'Homeopathic options often used: Aconite 30 for sudden chills, Bryonia 30 for dry cough, Arsenicum Album 30 for runny nose. Follow pack guidance.',
     ],
     watch: 'See a doctor if fever is above 101°F, breathing is hard, or symptoms last more than 4–5 days.',
   },
@@ -97,6 +97,8 @@ function App() {
         'Hello! I am your Homeopathic Care Agent.',
         'Ask any health query in simple words and I will reply in an easy way.',
         'Share your main symptom, how long it has been there, and if you take any medicine.',
+        'I provide general information only. This is not a diagnosis or emergency service.',
+        'Do not share personal IDs; your messages stay in this browser session.',
       ],
     },
   ])
@@ -183,6 +185,9 @@ function App() {
             />
             <button type="submit">Get Answer</button>
           </form>
+          <p className="micro-note">
+            Informational use only. For severe or lasting problems, please contact a qualified doctor.
+          </p>
         </section>
 
         <section className="card tips">
